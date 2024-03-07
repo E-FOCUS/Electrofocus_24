@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        {% if title %}
+            {{title}} | Symposium
+        {% else %}
+            Symposium
+        {% endif %}
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- add icon link -->
+    <link rel="icon" href="{{ url_for('static', filename='logo.jpg')}}" type="image/x-icon">
+    <!-- Add Bootstrap JS and Popper.js if needed -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery library -->
+    <script
+          src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--For https://ionic.io/ionicons-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- For google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!--Custom CSS Files-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_forms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='homeEvents.css') }}">
+
+    <!--Custom JS Files-->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+
+    {%block head%}
+    {%endblock head%}
+
+</head>
+
+<body>
+
+    <!--<script>
+        // Display the coming soon overlay
+        document.addEventListener('DOMContentLoaded', function () {
+            var overlay = document.querySelector('.coming-soon-overlay');
+            overlay.style.display = 'block';
+        });
+    </script>-->
+    <div class="flash-message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            
+            var end = new Date("2024-03-23T05:30:00+05:30").getTime(); // CHANGE: end time as per requirement
+            var countdown = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = end - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                $("#countdown").html(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    $("#myModal").modal('hide');
+                }
+            }, 1000);
+    
+            $("#myModal").modal('show');
+        });
+    </script>
+    
+
+<!--
+    <div class="overlay"></div>
+xxx Coming Soon Overlay
+    <div class="coming-soon-overlay">
+        <div class="coming-soon-text">
+            <h1 class="coming-soon-title">ElectroFocus 2024</h1>
+            <p class="coming-soon-textp">Coming soon ~ stay tuned!&#128512;</p>
+            <p class="coming-soon-textp">Registration will open soon 🎉🎉🎉.</p>
+            <p class="coming-soon-textp" style="font-size:1.3rem;margin-top:2rem;line-height:1.5;">For CONFERENCE registration please follow this link 👇</p>
+            <a class="conference-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfMvfASpCn5g1cUwDTm5fkLKET0O0onQjrTvxnfcc3UG6gbSw/viewform" style="font-family:Poppins;font-size:1rem;pointer:cursor;" target="_blank">click here</a>
+        </div>
+        xxx Add any additional content you want inside the overlay
+    </div>
+-->
+
+
+
+
+    
+    <div class="blur">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <img src="{{url_for('static', filename='images/efocu-logo.png')}}" class="rounded-pill" style="width: 40px;"> <span class="logo-1">Electro</span><span class="logo-2">focus</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="{{'active' if active_page == 'events' }} nav-link" href="{{ url_for('events') }}" disable>Events</a>
+                        </li>
+                        {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="{{'active' if active_page == 'accomodation' }} nav-link" href="{{ url_for('accomodation') }}">Accomodation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{'active' if active_page == 'dashboard' }} nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{'active' if active_page == 'logout' }} nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="{{'active' if active_page == 'signup' }} nav-link" href="{{ url_for('signup') }}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{'active' if active_page == 'login' }} nav-link" href="{{ url_for('login') }}">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <script>
+            $('.flash-message').delay(2500).fadeOut('slow');
+        </script>
+
+
+        {%block body%}
+        {%endblock body%}
+
+        <footer class="site-footer bg-dark" style="margin-top:1rem;">
+          <div class=" footer-div">
+              <div class=" flex footer-div">
+
+                  <div class="col-sm-4 col-md-4 col-lg-5">
+                    <div class="row">
+                      <img src="{{url_for('static', filename='images/eea_logo.jpeg')}}" class="img-fluid" style="height:150px;width:300px;">
+                    </div>
+                  </div>
+
+                  <div class="ml-auto col-sm-auto col-md-4 col-lg-5">
+                    <div class="row">
+                      <p><b>Chairpersons</b></p>
+                      <p class="chairperson">DHARUN KARTHICK S A</p><p> <i class="fa fa-phone mr-1"></i>9345888010 </p>
+                      <p class="chairperson">KIRAN B</p><p> <i class="fa fa-phone mr-1"></i>9597837433 </p>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-5 col-md-4 col-lg-2">
+                      <div class="row">
+                        <p>
+                            <i class="fa fa-envelope"></i>
+                            <a href="mailto:eeamit24@gmail.com" style="text-decoration: none;color:inherit;">eeamit24@gmail.com</a>
+                        </p>
+                        <p><i class="fas fa-home me-3"></i> <br>Madras Institute of Technology Campus, Anna University, Chromepet, Chennai - 600044</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <p class="social-media-text"> connect with us via social media ~ <a class="insta-icon" href="https://www.instagram.com/eea.mit?igsh=aDlyc25zN2pkOHll"><i class="fa-brands fa-instagram" style="color:white;"></i></a>  <a class="linkedin-icon" href="https://www.linkedin.com/company/electronics-engineers-association-mit/about/"><i class="fa-brands fa-linkedin" style="color:white;"></i></a></p>
+                  <p class="copyright-text text-center mt-2">&copy; 2024 Copyright <a class="text-reset fw-bold" href="/" >electrofocus.mitindia.edu</a>
+                  <br>
+                  <br>
+                  <i class="fa fa-solid fa-code"></i>  &nbsp; with &nbsp; <i class="fa fa-solid fa-heart"></i> &nbsp;  by &nbsp; <br>
+                  <a href="https://www.linkedin.com/in/rohinthram" style="color: rgb(252, 249, 173); text-decoration: none;">Rohinth Ram R V  </a>|
+                  <a href="https://www.linkedin.com/in/akilesh-saravanan-434253244" style="color: rgb(252, 249, 173); text-decoration: none;">  Akilesh S  </a>|
+                  <a href="https://www.linkedin.com/in/vinayak-s-b28125215" style="color: rgb(252, 249, 173); text-decoration: none;">  Vinayak S  </a>|
+                  <a href="https://www.linkedin.com/in/muhammad-rumaan-144039229" style="color: rgb(252, 249, 173); text-decoration: none;">Muhammad Rumaan</a>
+              </div>
+          </div>
+      </footer>
+
+
+    </div>
+
+
+    <<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

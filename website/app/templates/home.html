@@ -1,0 +1,500 @@
+{%extends "layout.html"%}
+
+{%block head%}
+<style>
+    .parent-events {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        text-align: center;
+        align-content: center;
+
+    }
+
+    .postcard__title{
+
+        width: 100%;
+        text-align: center;
+    }
+
+    #bgVideo {
+        width: 100%;
+    }
+
+    #aboutVideo {
+        border-radius: 50px;
+    }
+
+    .parent-about {
+        padding: 50px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+
+    #carouselExampleControls .carousel-item img {
+        width: 350px;
+        height: 350px;
+        margin-left:35vw !important;
+        margin-right:35vw !important;
+     }
+
+    .tt {
+        width: 80vw;
+    }
+    .mit-75{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem;
+        font-family:Poppins;
+
+    }
+    marquee{
+        font-family: Poppins;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+
+    }
+    .mit-75 img{
+        max-width:250px;
+
+    }
+    .mit-75-text{
+        font-family: 'POPPINS';
+        margin-top: 22px;
+        text-align: center;
+        font-size:1.5rem;
+
+    }
+
+    .title-event-img-div {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title-event-img {
+        width: 80vw;
+    }
+
+    #myModal {
+        color: black;
+
+    }
+
+    .modal-dialog {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .postcard.dark:hover{
+        background-color:#2f0513
+    }
+
+
+    @media only screen and (max-width: 1000px) {
+        .parent-about {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 2fr;
+        }
+
+        #aboutVideo {
+            border-radius: 50px;
+            width: 80vw;
+        }
+
+    }
+    .carousel{
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+    }
+
+    .imp-info {
+
+        text-align: center;
+    }
+    .about:hover{
+
+        transform: scale(1,1);
+    }
+    article.postcard{
+        max-width: 350px;
+        max-height: 380px;
+    }
+    article.postcard:hover{
+        transform: scale(1,1);
+    }
+    .postcard .postcard__text{
+        padding:0.5rem;
+    }
+    .highlight{
+
+        color: red;
+        font-size: 22px;
+        font-family: 'Poppins';
+    }
+    .postcard.dark:hover{
+        background-color:#2f0513
+    }
+
+
+     .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: red;
+     }
+
+
+
+
+    @keyframes zoominoutsinglefeatured {
+        0% {
+            transform: scale(1, 1);
+        }
+
+        50% {
+            transform: scale(1.1, 1.1);
+        }
+
+        100% {
+            transform: scale(1, 1);
+        }
+    }
+
+    .rainbow {
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari */
+  color: transparent;
+}
+
+    .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+            gap: 10px; /* Adjust the gap between images */
+            max-width: 800px; /* Adjust the maximum width of the grid */
+            margin: 20px auto;
+    }
+
+   .image-grid img {
+            width: 100%;
+            height: 100%;
+            max-height: 200px;
+
+            display: block;
+            border-radius: 8px; /* Optional: add border-radius for rounded corners */
+   }
+
+    @media (max-width: 600px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            .mit-75-text{
+                font-family: 'POPPINS';
+                margin-top: 15px;
+                text-align: center;
+                font-size:1rem;
+
+            }
+            .mit-75 img{
+                max-width:200px;
+            }
+            .mit-75{
+
+                padding: 1rem;
+
+            }
+            #carouselExampleControls .carousel-item img {
+                width: 200px;
+                height: 200px;
+                margin-left: 20vw !important;
+
+            }
+    }
+</style>
+
+
+{%endblock head%}
+{%block body%}
+
+
+<!--<div class="modal fade" id="myModal">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content" style="background-color: #0f4d69; border: #299cd1 solid ; color: #ffffff;">-->
+<!--            <div class="modal-header" style="border: 0;">-->
+<!--                <h4 class="modal-title">Symposium</h4>-->
+<!--                <button type="button" class="close" data-bs-dismiss="modal"-->
+<!--                    style="border: 0;border-radius: 20%;">&times;</button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <h1 style="text-align: center;" id="countdown"></h1><br>-->
+<!--                <div class="imp-info">On Spot Registrations available !!!</div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer" style="align-self: center; align-items: center;">-->
+<!--                For Accomodation please fill this form<br>-->
+<!--                <a href="https://external.form.notexists" target="_blank">external form</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+<marquee behavior="scroll" direction="left" style="font-family:Poppins;">
+    🚀 Exciting Intern Opportunities | 💻 Top performers get Coding Ninja merchandise and coupons | 🎮 Game stall & 1.5L prize pool | 🏆 Special reward for teams with maximum wins | 💰 On-spot registration available with extra ₹30 | 🎙 Conference conducted.
+</marquee>
+</div>
+<div class="section">
+    <video autoplay muted loop id="bgVideo">
+        <source src="{{url_for('static', filename='video.mp4')}}" type="video/mp4"> <!-- CHANGE -->
+    </video>
+</div>
+
+<div class="mit-75">
+    <div><img src="{{url_for('static', filename='images/goldenJub.png')}}" alt="" srcset=""></div>
+    <div class="mit-75-text">Seventy-five years of excellence: Celebrating a legacy that has shaped minds, inspired dreams, and forged lasting connections. Here's to the past, present, and future of our extraordinary  journey of MIT!</div>
+</div>
+<!-- events -->
+
+
+        <section class="dark">
+            <div class="container py-4">
+                <article class="about">
+                    <h1 class="postcard__title blue" style="color: red; font-family:Poppins;">Welcome to ElectroFocus 2024: Sparks of Brilliance by EEA Association</h1><br>
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="d-flex align-items-center justify-content-center col">
+                            <img class="about__img" src="{{url_for('static', filename='images/efocu-logo.png')}}" alt="logo" />
+                        </div>
+            
+                        <div class=" col postcard__text">
+
+                            <div class="postcard__bar"></div>
+                            <div class="about__preview-txt " style="font-family:Poppins;" >Electrofocus, a Intercollege National Level technical extravaganza meticulously organized by the Electronics Engineer's Association of Madras Institute of Technology.<br><br>
+                            Featuring a dynamic lineup of over <span class="highlight" style="color:red;">20+ events</span> , <span class="highlight" style="color:red; font-size:20px;">5+ workshops</span> tailored for aspiring engineers, this symposium stands out as an unparalleled platform for engineers to showcase their talents and skills. <br><br>
+            
+
+                                <br><br>
+                                Mark your Calendars on
+                                <br>
+                                <i class='fa-regular fa-calendar' style="color:red; margin-right-5px;"></i> <span class="highlight" style="color:red;">March 23 & 24</span><br><br>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+        <h1 class="h1 text-center" id="pageHeaderTitle" style="font-size:1.4rem;font-family:Poppins;font-weight:800;">Explore Our Events and Workshops!</h1>
+        <div class="container">
+            <div class="row" style="grid-gap:0.5rem;">
+                <article class="postcard dark blue col-md-6 col-lg-4">
+                <a href="{{url_for('workshops')}}" class="d-flex align-items-center">
+                    <img class="postcard__img" src="{{url_for('static', filename='images/workshop_thumbnail.png')}}"
+                        alt="Image Title" />
+                </a>
+                <a href="{{url_for('workshops')}}">
+                    <div class="postcard__text">
+                        <h1 class="postcard__title blue" style="font-size:1.4rem;">Workshops</h1>
+                        <ul class="postcard__tagbox">
+                            <li class="tag__item play blue">
+                                <a href="{{url_for('workshops')}}">Explore <i class="fas fa-play mr-2"></i></a>
+                            </li>
+                        </ul>
+                </a>
+
+        </article>
+        <article class="postcard dark blue col-md-6 col-lg-4">
+
+            <a href="{{url_for('premium_events')}}" class="d-flex align-items-center">
+
+                <img class="postcard__img"
+                    src="{{url_for('static', filename='images/premium_thumbnail.png')}}"
+                    alt="Image Title" />
+            </a>
+                <a href="{{url_for('premium_events')}}">
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue" style="font-size:1.4rem;">Premium Events</h1>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item play blue">
+                            <a href="{{url_for('premium_events')}}">Explore <i class="fas fa-play mr-2"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+
+
+
+        </article>
+        <article class="postcard dark blue col-md-6 col-lg-4">
+            <a href="{{url_for('tech_events')}}" class="d-flex align-items-center">
+                <img class="postcard__img" src="{{url_for('static', filename='images/tech_thumbnail.png')}}"
+                    alt="Image Title" />
+            </a>
+            <a href="{{url_for('tech_events')}}">
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue" style="font-size:1.4rem;">Tech Events</h1>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item play blue">
+                            <a href="{{url_for('tech_events')}}">Explore <i class="fas fa-play mr-2"></i></a>
+                        </li>
+                    </ul>
+        </a>
+
+        </article>
+        <article class="postcard dark blue col-md-6 col-lg-4">
+            <a href="{{url_for('non_tech_events')}}" class="d-flex align-items-center">
+                <img class="postcard__img" src="{{url_for('static', filename='images/non_tech_thumbnail.png')}}"
+                    alt="Image Title" />
+            </a>
+            <a href="{{url_for('non_tech_events')}}">
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue" style="font-size:1.4rem;">Non-Tech Events</h1>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item play blue">
+                            <a href="{{url_for('non_tech_events')}}">Explore <i class="fas fa-play mr-2"></i></a>
+                        </li>
+                    </ul>
+              </a>
+
+        </article>
+        <article class="postcard dark blue col-md-6 col-lg-4">
+
+            <a href="{{url_for('conference')}}" class="d-flex align-items-center">
+
+                <img class="postcard__img"
+                    src="{{url_for('static', filename='images/conference.png')}}"
+                    alt="Image Title" />
+            </a>
+                <a href="{{url_for('conference')}}">
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue" style="font-size:1.4rem;">Conference</h1>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item play blue">
+                            <a href="{{url_for('conference')}}">Explore <i class="fas fa-play mr-2"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+
+
+
+        </article>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<div class="container-perks">
+    <h2 class="perks-title">Perks</h2>
+    <div id="perksContainer">
+
+
+        <div class="perk">
+            <span style="font-size:2rem;">🚀</span>
+            Exciting <span class="highlight" style="color:red;">Intern</span> Opportunities
+        </div>
+
+        <div class="perk">
+           <span style="font-size:2rem;"> 💻</span>
+            Top performers get <span class="highlight" style="color:red;">Coding Ninja merchandise</span> and coupons
+        </div>
+
+        <div class="perk">
+           <span style="font-size:2rem;"> 🎮</span>
+            Game stall & <span class="highlight" style="color:red;font-size:1.4rem;">1.5L</span> prize pool
+        </div>
+
+        <div class="perk">
+           <span style="font-size:2rem;"> 🏆</span>
+            Special reward for teams with  <span class="highlight" style="color:red;font-size:1.4rem;">Maximim wins!</span>
+        </div>
+
+        <div class="perk">
+            <span style="font-size:2rem;">💰</span>
+             Early bird offer : <span class="highlight" style="color:red;font-size:1.4rem;">Low cost</span> @ online registration
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<div class=" d-flex justify-content-center mb-5">
+
+    <div class=" card text-center text-dark"
+        style="background-image: url('static/images/pass.jpeg');border: gold 5px solid; box-shadow: 10px 10px 21px -12px gold; min-width: 80vw;">
+        <div class="card-body">
+            <h5 style="font-family:Poppins;color:white;">Pass!</h5>
+            <h6 class="card-subtitle mb-2 text-muted" style="font-family:Poppins;color:white;">Choose your pass</h6>
+            <p class="card-text" style="font-family:Poppins;color:white;">Grab the passes at most affordable price!</p>
+
+            <a href="{{url_for('buy_pass')}}" class="btn" style="background-color: gold;">Buy Now</a>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" style="display:flex;align-items:center; flex-direction:column; padding:3rem;">
+    <h1 style="font-family:Poppins;font-size:1.4rem; font-weight:800;">ACCOMADATION</h1>
+    <img src="{{url_for('static', filename='images/accomadation.jpeg')}}" alt="Accommodation Image" class="accomadation">
+    <a href="#" class="register-btn accomadation-btn">Register</a>
+</div>
+
+
+<h3 style="font-family:Poppins;font-size:1.4rem; text-align:center;font-weight:800;">OUR SPONSORS</h3><br>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner"  style="">
+    <div class="carousel-item active mx-auto">
+      <a href="https://www.poorvika.com" target="_blank">
+        <img src="{{url_for('static', filename='images/sponsor-1.png')}}" alt="poorvika sponsor" class="mx-auto">
+      </a>
+    </div>
+    <div class="carousel-item">
+       <a href="https://www.azent.com/" target="_blank">
+        <img src="{{url_for('static', filename='images/sponsor-2.png')}}" alt="azent sponsor">
+      </a>
+    </div>
+    <div class="carousel-item">
+      <a href="https://www.codingninjas.com/" target="_blank">
+        <img src="{{url_for('static', filename='images/sponsor-3.png')}}" alt="coding ninjas sponsor">
+      </a>
+    </div>
+    <div class="carousel-item">
+     <a href="https://www.ilink-digital.com/" target="_blank">
+          <img src="{{url_for('static', filename='images/sponsor-4.jpeg')}}" alt="ilink sponsor" >
+     </a>
+    </div>
+    <div class="carousel-item">
+     <a href="https://www.easunmr.com/" target="_blank">
+          <img src="{{url_for('static', filename='images/sponsor-5.jpeg')}}" alt="easunmr sponsor">
+     </a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+{%endblock body%}
